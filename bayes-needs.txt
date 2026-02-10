@@ -1,0 +1,61 @@
+# First class 02/03/2026
+
+## Necessary software
+
+### R and RStudio
+### XCode
+### Rtools
+### JAGS
+### Stan
+
+## Overarching student needs/interests following first meeting
+
+### Presence absence       
+### Counts
+### Observation process
+### Spatial 
+### Temporal
+### Coding tools (want to code models by hand)
+
+## Pedagogical approach
+
+### Use hands-on examples 
+#### Send examples before meetings
+#### Explain and/or modify models during meetings
+##### Do we have time to freestyle code?
+### Hierarchy & covariates layered throughout
+### Model and algorithm diagnostics intro early/mid, then weekly
+### Input/output wrangling, summarization, and plotting throughout
+### Predictions and projections throughout
+
+### Impose decision making on process
+#### Distributional assumptions
+#### Data transformations or representation
+#### Software choice
+#### Hierarchical structure
+
+## Content
+### Module 0: Bayesian terminology and tools (toy examples)
+### Module 1: binomial models and likelihoods (pres/abs)
+### Module 2: count models and likelihoods (sturgeon?)
+### Module 3: state-space models (occupancy)
+### Module 4: state-space models (abundance)
+### Module 5: Bayesian p-values and PPCs/GOFs
+### Module 6: spatial and temporal autocorrelation
+### Module 7: constrained spatial networks
+### Module 8: putting together the pieces (maybe SSNs by this point if I figure them out?)
+
+
+### Other potential content ideas: 
+#### Basic models like regression/anova/ancova?
+#### Multi-state and markovian processes
+#### Survival models or mark-recapture (this is it's own world, really, so basics)
+#### Non-linear responses & cholesky decomposition in Stan
+#### Multivariate responses/priors
+#### Spatial stream network (SSN) analysis (can I get this Bayes'd in time?)
+#### Time-series data? Can bake a lot of this into other examples
+#### n-occupancy models for species at low abundance
+#### Integrated population models (samge as mark-recap: basics)
+
+
+
