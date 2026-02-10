@@ -1,0 +1,25 @@
+model {
+  # Likelihood
+  for(i in 1:N){
+    y[i] ~ dnorm(y_hat[i], tau)
+    y_hat[i] <- alpha[pop[i]] + beta[pop[i]] * x[i]
+  }
+  
+  # Priors
+  for(j in 1:n_pop){
+    alpha[j] ~ dnorm(alpha_mu, alpha_tau)
+    beta[j] ~ dnorm(beta_mu, beta_tau)
+  }
+  
+  beta_mu ~ dnorm(0, 1)
+  beta_tau <- 1/pow(beta_sigma, 2)
+  beta_sigma ~ dunif(0, 10)
+  
+  alpha_mu ~ dnorm(0, 1)
+  alpha_tau <- 1/pow(alpha_sigma, 2)
+  alpha_sigma ~ dunif(0, 10)
+  
+  tau <- 1/pow(sigma, 2)
+  sigma ~ dunif(0, 10)
+  
+}
