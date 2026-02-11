@@ -1,10 +1,11 @@
 # Package load ----
 library(R2jags)
+# library(JagsUI)
 library(tidyverse)
 library(lubridate)
 
 # Data manipulation ----
-# Read data ----
+# . Read data ----
 cray <-  read.csv("data/cray.csv", stringsAsFactors = FALSE)
 cpues <- read.csv('data/cpue.csv', stringsAsFactors = FALSE)
 cpues$waterbody_site <- paste0(cpues$waterbody, " - ", cpues$site)
@@ -38,6 +39,8 @@ mod_data <- list(
   N = nrow(cray_data),
   n_pop = length(unique(cray_data$waterbody_site))
   )
+
+
 
 # Model calibration ----
 # Parameters to estimate
