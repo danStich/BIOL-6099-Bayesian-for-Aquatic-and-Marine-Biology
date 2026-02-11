@@ -1,0 +1,10 @@
+model {                       
+      # Likelihood
+        for(i in 1:n.packs){      
+          y[i] ~ dbinom( theta, n[i] )   
+        }                         
+
+        theta ~ dbeta(a, b)       
+        a <- 10                    
+        b <- 10
+    }
