@@ -2,6 +2,7 @@
 # Load necessary packages
   library(R2jags)
 
+# Make some convenience functions ----
 # Create function to invert logit link function
   inv.logit = function(x){
     exp(x)/(1+exp(x))
