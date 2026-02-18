@@ -51,12 +51,15 @@ fit <- jags(data = mod_data,
             parameters.to.save = params,
             model.file = 'models/cray_jags_hierarchical',
             n.chains = 3,
-            n.iter = 5000,
-            n.burnin = 2500,
+            n.iter = 50000,
+            n.burnin = 25000,
             n.thin = 5)
 
 # Result ----
 print(fit)
+
+# Visually assess traceplots of MCMC chains
+traceplot(fit)
 
 # Extract posteriors
 posts <- fit$BUGSoutput$sims.list
