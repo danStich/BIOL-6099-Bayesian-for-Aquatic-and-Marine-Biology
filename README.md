@@ -17,4 +17,4 @@ R scripts in the main directory for class activities.
 
 `01_cray_*.R` Bayesian hierarchical linear model. Uses log-10 transformed length and mass of rusty crayfish *Phoxonius rusticus* collected from 7 sites in the upper Susquehanna River to fit length-weight regressions while accounting for variation within and among sites. Used to demonstrate the 'bayesics' of writing and wrangling Bayesian hierarchical models "by hand" in JAGS and Stan.
 
-`02_otsego_sav.R` Bayesian logistic regression for simulated aquatic plant survey at Otsego Lake, NY using [rstanarm](https://mc-stan.org/rstanarm/articles/rstanarm.html) and [rstan](https://mc-stan.org/rstan/) for comparing syntax and functionality.
+`02_otsego_stan.R` Bayesian logistic regression for simulated aquatic plant survey at Otsego Lake, NY using [rstanarm](https://mc-stan.org/rstanarm/articles/rstanarm.html) and [rstan](https://mc-stan.org/rstan/) for comparing syntax and functionality. Will be jumping off point for discussing occupancy modeling and introduces really basic spatial regression components.
