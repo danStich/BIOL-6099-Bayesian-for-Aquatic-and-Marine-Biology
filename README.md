@@ -15,6 +15,8 @@ The main directory contains R scripts from class examples using JAGS or Stan. Th
 ## Modules
 R scripts in the main directory for class activities.
 
-`01_cray_*.R` Bayesian hierarchical linear model. Uses log-10 transformed length and mass of rusty crayfish *Phoxonius rusticus* collected from 7 sites in the upper Susquehanna River to fit length-weight regressions while accounting for variation within and among sites. Used to demonstrate the 'bayesics' of writing and wrangling Bayesian hierarchical models "by hand" in JAGS and Stan.
+`01_cray_*.R` Bayesian hierarchical **linear model**. Uses log-10 transformed length and mass of rusty crayfish *Phoxonius rusticus* collected from 7 sites in the upper Susquehanna River to fit length-weight regressions while accounting for variation within and among sites. Used to demonstrate the 'bayesics' of writing and wrangling Bayesian hierarchical models "by hand" in JAGS and Stan.
 
-`02_otsego_stan.R` Bayesian logistic regression for simulated aquatic plant survey at Otsego Lake, NY using [rstanarm](https://mc-stan.org/rstanarm/articles/rstanarm.html) and [rstan](https://mc-stan.org/rstan/) for comparing syntax and functionality. Will be jumping off point for discussing occupancy modeling and introduces really basic spatial regression components.
+`02_otsego_stan.R` Bayesian **logistic regression** for simulated aquatic plant survey at Otsego Lake, NY using [rstanarm](https://mc-stan.org/rstanarm/articles/rstanarm.html) and [rstan](https://mc-stan.org/rstan/) for comparing syntax and functionality. Will be jumping off point for discussing occupancy modeling and introduces really basic spatial regression components.
+
+`03_sturgeon_jags.R` Bayesian **count models** for juvenile Atlantic sturgeon *Acipenser oxyrinchus* in the Hudson River, NY, USA. These data were analyzed using n-mixture models by [Stich et al. 2025](https://academic.oup.com/tafs/article/154/2/134/8098175?login=false) with code and data for that study available through GitHub.
