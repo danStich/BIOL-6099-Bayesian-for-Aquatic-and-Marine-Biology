@@ -1,0 +1,20 @@
+model {
+
+  # Likelihood
+  # State process (abundance)
+  for(i in 1:nobs){
+      y[i] ~ dpois(lambda[i])
+  }
+  
+  # Linear predictor
+  for(i in 1:nobs){
+    log_lambda[i] <- inprod(beta[], X[i,])
+    lambda[i] <- exp(log_lambda[i])
+  }
+  
+  # Priors on regression parameters
+  for(k in 1:K){
+    beta[k] ~ dnorm(0, 1)
+  }
+
+}
