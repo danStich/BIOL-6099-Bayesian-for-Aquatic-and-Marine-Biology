@@ -5,6 +5,7 @@ model {
     for(t in 1:n_year){
     # Detection 
     y[i, t] ~ dbern(p[i, t] * z[i])
+    
     logit(p[i, t]) <- lp[i, t]
     lp[i, t] ~ dnorm(lp_mu, lp_tau)
     
@@ -18,10 +19,10 @@ model {
 
   lpsi_mu ~ dnorm(0, 1)
   lpsi_tau <- 1/(sigma_psi * sigma_psi)
-  sigma_psi ~ dunif(0, 1)
+  sigma_psi ~ dunif(0, 10)
 
   lp_mu ~ dnorm(0, 1)
   lp_tau <- 1/(sigma_p * sigma_p)
-  sigma_p ~ dunif(0, 1)
+  sigma_p ~ dunif(0, 10)
   
 }

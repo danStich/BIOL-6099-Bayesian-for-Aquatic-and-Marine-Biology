@@ -2,6 +2,7 @@
 library(tidyverse)
 library(reshape)
 library(R2jags)
+library(RColorBrewer)
 
 
 # Data ----
@@ -29,6 +30,7 @@ whs_occ_mat <- reshape::cast(data = whs_occ,
 # Extract only the capture history columns
 # bc first column has waterbody name
 whs_ch <- whs_occ_mat[, 2:ncol(whs_occ_mat)]
+
 
 
 # Data formatting ----
@@ -70,7 +72,40 @@ print(jags_fit, digits = 3)
 
 
 # For Class ----
+posts <- jags_fit$BUGSoutput$sims.list
+
+names(posts)
+
+psi_ests <- reshape::melt(posts$psi)
+names(psi_ests) <- c("iteration", "site", "estimate")
+
+
+psi_summary <- psi_ests %>% 
+  group_by(site) %>% 
+  summarize(fit = mean(estimate),
+            lwr = quantile(estimate, 0.025),
+            upr = quantile(estimate, 0.975))
+
+
+psi_preds <- data.frame(counts, psi_summary)
+
+psi_spatial_preds <- merge(psi_preds,
+                           whs_occ[, c(2, 5, 6)],
+                           by = "water")
+
+
 # Color ramp
-myPalette <- colorRampPalette(rev(brewer.pal(5, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(10), limits=c(10, 25))
+myPalette <- colorRampPalette(rev(brewer.pal(10, "Spectral")))
+sc <- scale_colour_gradientn(colours = myPalette(10), limits=c(0.10, 1))
+
+ggplot(psi_spatial_preds,
+       aes(x = nytme, y = nytmn, z = fit, color = fit)) +
+  geom_point(size = 4, alpha = 0.25) +
+  coord_sf() +
+  sc + 
+  theme_bw() +
+  theme(legend.position = "top",
+        legend.direction = "horizontal")
+
+
 
