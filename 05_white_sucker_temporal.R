@@ -25,10 +25,6 @@ whs <- whs %>%
   mutate(rep = row_number()) %>%
   ungroup()
 
-whs$site_year <- as.numeric( as.factor(
-  paste0(whs$water, whs$year)
-))
-
 
 # Data formatting ----
 # Observed presence/absence
@@ -45,8 +41,7 @@ jags_data <- list(
   site = as.numeric(as.factor(whs_occ$water)),
   n_year = length(unique(whs_occ$year)),
   year = as.numeric(as.factor(whs_occ$year)),
-  n_obs = nrow(whs_occ),
-  site_year = whs$site_year
+  n_obs = nrow(whs_occ)
 )
 
 # Function for initial values
