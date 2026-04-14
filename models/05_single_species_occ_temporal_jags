@@ -1,0 +1,40 @@
+model {
+
+  for(i in 1:n_obs){
+    # Likelihood
+    y[i] ~ dbern(p_hat[i] * z[i])
+    
+    # Latent occupancy state
+    z[i] ~ dbern(psi_hat[i])
+    
+    # Linear predictor for detection
+    p_hat[i] <- p[site[i], year[i]]
+    
+    # Linear predictor for occupancy
+    psi_hat[i] <- p[site[i], year[i]]
+  }
+    
+  # Priors
+  # Detection  
+  for(i in 1:n_site){
+    for(t in 1:n_year){
+    
+      logit(p[i, t]) <- lp[i, t]
+      lp[i, t] ~ dnorm(lp_mu, lp_tau)
+            
+      # Occupancy
+      logit(psi[i, t]) <- lpsi[i, t] 
+      lpsi[i, t] ~ dnorm(lpsi_mu, lpsi_tau)
+  
+    }
+  }
+    
+  lpsi_mu ~ dnorm(0, 1)
+  lpsi_tau <- 1/(sigma_psi * sigma_psi)
+  sigma_psi ~ dunif(0, 1)
+
+  lp_mu ~ dnorm(0, 1)
+  lp_tau <- 1/(sigma_p * sigma_p)
+  sigma_p ~ dunif(0, 1)
+  
+}
