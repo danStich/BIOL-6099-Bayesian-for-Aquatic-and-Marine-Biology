@@ -11,7 +11,7 @@ model {
     p_hat[i] <- p[site[i], year[i]]
     
     # Linear predictor for occupancy
-    psi_hat[i] <- p[site[i], year[i]]
+    psi_hat[i] <- psi[site[i], year[i]]
   }
     
   # Priors
@@ -29,12 +29,12 @@ model {
     }
   }
     
-  lpsi_mu ~ dnorm(0, 1)
+  lpsi_mu ~ dnorm(0, 0.001)
   lpsi_tau <- 1/(sigma_psi * sigma_psi)
-  sigma_psi ~ dunif(0, 1)
+  sigma_psi ~ dunif(0, 10)
 
-  lp_mu ~ dnorm(0, 1)
+  lp_mu ~ dnorm(0, 0.001)
   lp_tau <- 1/(sigma_p * sigma_p)
-  sigma_p ~ dunif(0, 1)
+  sigma_p ~ dunif(0, 10)
   
 }
