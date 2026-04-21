@@ -21,9 +21,9 @@ R scripts in the main directory for class activities.
 
 `03_sturgeon_jags.R` Bayesian **count models** for juvenile Atlantic sturgeon *Acipenser oxyrinchus* in the Hudson River, NY, USA. These data were analyzed using n-mixture models by [Stich et al. 2025](https://academic.oup.com/tafs/article/154/2/134/8098175?login=false) with code and data for that study available through GitHub.
 
-`04_white_sucker.R` An overly simplistic single-season occupancy model for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA. Ignores all spatial and temporal structuring. We build on this example in modules that follow.
+`04_white_sucker.R` An overly simplistic **single-season occupancy model** for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA. Ignores all spatial and temporal structuring. We build on this example in modules that follow.
 
-`05_dynamic_occupancy_jags.R` A slightly simplistic dynamic occupancy model for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA. Ignores all spatial structuring, but now integrates large-scale, long-run turnover rates.
+`05_dynamic_occupancy_jags.R` A slightly simplistic **dynamic occupancy model** for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA. Ignores all spatial structuring, but now integrates large-scale, long-run turnover rates.
 
-`06_dynamic_occupancy_spatial_jags.R` Arguably an overly complex dynamic occupancy model for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA, that incorporates spatial and temporal structure in occupancy, and local colonization and extinction probabilities. We marginalize out the latent state so the model runs fast(er) but easy enough to add it back in if/when needed.
+`06_dynamic_occupancy_spatial_jags.R` Arguably an overly complex **spatially explicit dynamic occupancy model** for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA, that incorporates spatial and temporal structure in occupancy, and local colonization and extinction probabilities. We marginalize out the latent state so the model runs fast(er) but easy enough to add it back in if/when needed.
 
