@@ -1,0 +1,69 @@
+model {
+  
+  #### ---------------------------
+  #### Priors
+  #### ---------------------------
+  
+  logit(psi1) <- psi1_lp
+  psi1_lp ~ dnorm(0, 1)
+  
+  # Colonization
+  logit(gamma) <- gamma_lp
+  gamma_lp ~ dnorm(0, 1)
+  
+  # Extinction
+  logit(eps) <- eps_lp
+  eps_lp ~ dnorm(0, 1)
+  
+  logit(p) <- p_lp
+  p_lp ~ dnorm(0, 1)
+  
+  
+  #### ---------------------------
+  #### State process (occupancy)
+  #### ---------------------------
+  
+  for (i in 1:n_site) {
+    
+    # Initial occupancy
+    z[i,1] ~ dbern(psi1)
+    
+    # Dynamic occupancy for t > 1
+    for (t in 2:n_year) {
+      
+      muZ[i,t] <- z[i,t-1] * (1 - eps) +
+        (1 - z[i,t-1]) * gamma
+      
+      z[i,t] ~ dbern(muZ[i,t])
+    }
+  }
+  
+  
+  #### ---------------------------
+  #### Observation process
+  #### Observation-based likelihood
+  #### ---------------------------
+  
+  for (i in 1:n_site) {
+    for (t in 1:n_year) {
+      
+      # Detection probability conditional on occupancy
+      p_eff[i,t] <- z[i,t] * p
+      
+      # LiKEliHoOd aggregated on site and year
+      y[i,t] ~ dbin(p_eff[i,t], K[i,t])
+    }
+  }
+  
+  
+  #### ---------------------------
+  #### Derived quantities (occupancy state)
+  #### ---------------------------
+  
+  for(i in 1:n_site) {
+    for (t in 1:n_year) {
+      psi[i, t] <- mean(z[i, t])
+    }
+  }
+  
+}

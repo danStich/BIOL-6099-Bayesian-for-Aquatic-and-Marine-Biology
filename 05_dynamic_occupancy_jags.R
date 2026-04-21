@@ -10,9 +10,10 @@ whs <- read.csv("data/whs.csv")
 # Get sites with more than two samples 
 # per year of monitoring
 counts <- whs %>% 
+  filter(water != "Unnamed Water") %>% 
   group_by(water, year) %>% 
   summarize(n_sample = n()) %>% 
-  filter(n_sample >= 3, water != "Unnamed Water")
+  filter(n_sample >= 3)
 
 # Retain only sites with n >= 3 in sample data
 whs <- whs %>% 
@@ -35,7 +36,7 @@ whs_occ_mat <- reshape::cast(data = whs,
                              add.missing = TRUE,
                              fun.aggregate = max)
 
-# Number of surveys for m-array likelihood
+# Number of surveys for likelihood
 k_mat <- whs %>% 
   group_by(water, year) %>% 
   summarize(reps = max(rep))
@@ -122,7 +123,9 @@ psi_spatial_preds <- merge(psi_summary,
 
 # Color ramp
 myPalette <- colorRampPalette(rev(brewer.pal(5, "Spectral")))
-sc <- scale_colour_gradientn(colours = myPalette(5), limits=c(0, 1))
+sc <- scale_colour_gradientn(colours = myPalette(10), 
+                             limits=c(min(psi_spatial_preds$fit),
+                                      max(psi_spatial_preds$fit)))
 
 # Plot
 psi_spatial_preds %>% 
