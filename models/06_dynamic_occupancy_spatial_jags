@@ -1,0 +1,93 @@
+model {
+  
+  #### ---------------------------
+  #### Priors
+  #### ---------------------------
+  
+  # Linear predictors of colonization and extinction
+  for(i in 1:n_site){
+    for(t in 1:n_year){
+      # Colonization
+      logit(gamma[i, t]) <- beta0_gamma + 
+                              inprod(X_smooth[i,], beta_gamma[]) + 
+                                inprod(Xy_smooth[t,], alpha_gamma[])
+      
+      # Extinction
+      logit(eps[i, t]) <- beta0_eps + 
+                            inprod(X_smooth[i, ], beta_eps[]) + 
+                                inprod(Xy_smooth[t, ], alpha_eps[])
+      }
+    }
+    
+    # Priors on spatial parameters
+    for(i in 1:K_smooth){
+      # Occupancy
+      beta_psi[i] <- sigma_psi * z_psi[i]
+      z_psi[i] ~ dnorm(0, 1)
+      
+      # Colonization
+      beta_gamma[i] <- sigma_gamma * z_gamma[i]
+      z_gamma[i] ~ dnorm(0, 1)    
+      
+      # Extinction
+      beta_eps[i] <- sigma_eps * z_eps[i]
+      z_eps[i] ~ dnorm(0, 1)    
+    } 
+    
+    # Priors for lp intercepts
+    beta0_psi ~ dnorm(0, 1)
+    beta0_gamma ~ dnorm(0, 1)
+    beta0_eps ~ dnorm(0, 1)
+
+    # Priors for spatial variance components
+    sigma_psi ~ dunif(0, 5)
+    sigma_gamma ~ dunif(0, 5)
+    sigma_eps ~ dunif(0, 5)
+    
+    # Priors for temporal parameters
+    for(t in 1:Ky_smooth){
+      alpha_gamma[t] ~ dnorm(0, 1)
+      alpha_eps[t] ~ dnorm(0, 1)
+    }
+    
+    
+  # Detection
+  logit(p) <- p_lp
+  p_lp ~ dnorm(0, 1)
+  
+  
+  
+  #### ---------------------------
+  #### State process (occupancy)
+  #### ---------------------------
+  
+  for (i in 1:n_site) {
+    
+    # Occupancy in year 1
+    logit(psi[i, 1]) <- beta0_psi + inprod(X_smooth[i, ], beta_psi[])
+    
+    # Dynamic occupancy for t > 1
+    # Marginalizing out z
+    for (t in 2:n_year) {
+      
+      psi[i, t] <- psi[i, t-1] * (1 - eps[i, t]) + (1 - psi[i, t-1]) * gamma[i, t]
+      
+    }
+  }
+  
+  
+  #### ---------------------------
+  #### Observation process
+  #### Observation-based likelihood
+  #### ---------------------------
+  
+  for (i in 1:n_site) {
+    for (t in 1:n_year) {
+      
+      # LiKEliHoOd aggregated on site and year
+      # joint product through marginalization of z
+      y[i, t] ~ dbin(p * psi[i, t], K[i, t])
+    }
+  }
+  
+}
