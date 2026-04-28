@@ -27,3 +27,6 @@ R scripts in the main directory for class activities.
 
 `06_dynamic_occupancy_spatial_jags.R` Arguably an overly complex **spatially explicit dynamic occupancy model** for white sucker *Catostomus commersonii* in the upper Susquehanna River, NY, USA, that incorporates spatial and temporal structure in occupancy, and local colonization and extinction probabilities. We marginalize out the latent state so the model runs fast(er) but easy enough to add it back in if/when needed.
 
+`06_dynamic_occupancy_spatial_nimble.R` Identical to previous example, but this time in NIMBLE, so it runs even faster.
+
+`06_dynamic_occupancy_spatial_nimble_latent_z.R` Identical to previous example in NIMBLE, except that now we add back in the latent state and begin critiquing the approach. Not quite as fast as previous, but still pretty quick as these models go.
