@@ -10,7 +10,7 @@ The main directory contains R scripts from class examples using JAGS, Stan, or N
 
 `models` JAGS and Stan model files used in the example scripts
 
-`toy_examples` Scripts for toy examples to demonstrate variety of applications and analysis tools ([brms](https://paulbuerkner.com/brms/), [rstanarm](https://mc-stan.org/rstanarm/articles/rstanarm.html), etc.) that are not covered in detail in this class (but they are awesome tools and you should use them when you can). Most examples in this directory are derived from silly disagreements or questions that required "rigorous" sampling and analysis with Bayesian statistics of course.
+`toy_examples` Scripts for toy examples to demonstrate variety of applications and analysis tools ([brms](https://paulbuerkner.com/brms/), [rstanarm](https://mc-stan.org/rstanarm/articles/rstanarm.html), etc.) that are not covered in detail in this class (but they are awesome tools and you should use them when you can because they make Bayesian hierarchical modeling so much easier and honestly more reliable when you are not constantly re-writing simple regression models that the pros have optimized). Most examples in this directory are derived from silly disagreements or questions that required "rigorous" sampling and analysis with Bayesian statistics of course.
 
 ## Modules
 R scripts in the main directory for class activities.
